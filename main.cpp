@@ -172,7 +172,7 @@ int main(){
             else p("PIN anda salah atau anda belum mendaftar\n");
         }
     }
+    else if(a==-99) break;
     else p("INPUTAN ANDA TIDAK VALID");
-    if(a==-99) break;
     }
 }
