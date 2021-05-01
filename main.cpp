@@ -14,6 +14,15 @@
 unsigned int
 sleep(unsigned int seconds);
 
+//Public DEFINITION
+int fpb(int a, int h);
+double enkripRSA(double msg);
+double dekripRSA(double ce);
+void Lis(int x);
+int ambilsaldo(int x);
+int Log(char name[],int al);
+bool strcmpk(char x[],char y[]);
+
 int fpb(int a, int h){
     int temp;
     while(1)
@@ -96,14 +105,65 @@ void Lis(int x){
     }
 }
 
+int ambilsaldo(int x){	
+	int y;
+	char t='y';
+	do{
+		system("cls");
+		p("Berapa Sekiranya saldo yang anda ingin ambil?\n");
+		p("Sisa Saldo anda sekarang adalah %d\n",x);
+		sc(d,&y);	
+		if(y<=x){
+			p("Selamat uang anda berhasil ditarik>.<\n");
+			x=x-y;
+			p("Saldo anda tersisa %d\n",x);
+		}
+		else p("Maaf Saldo anda tidak mencukupi untuk melakukan penarikan ini");
+		p("Ingin mengambil saldo kembali? [Y/N]\n");
+		t=getchar();
+	}while(t=='y' or t=='Y');
+	return x;
+}
+
+int nambahsaldo(int x){
+	int y;
+	char t='y';
+	do{
+		system("cls");
+		p("Masukkan Nominal Uang yang ingin anda tabung kan = ");
+		sc(d,&y);
+		if(y==0){
+			p("Keinginan anda diCancel(press enter)\n");
+			t=getchar();
+			return x;
+		}
+		p("Saldo anda sebesar %d, Anda ingin menabung sebanyak %d\n",x,y);
+		p("Anda Yakin dengan keputusan anda? [Y/N]\n");
+	}while(t=='y' or t=='Y');
+	p("Saldo anda sekarang %d\n",x+y);
+	p("Terimakasih telah menggunakan menggunakan jasa penyimpanan kami\n(press Enter)");
+	t=getchar();
+	return x+y;
+}
+
 int Log(char name[],int al){
+	char t[100];
+    char yyy[100],satu[100],dua[100],outp[100];;
+    while(true){
     system("cls");
     p("Selamat Datang %s\n", name);
     p("Saldo Anda tersisa %d\n",al);
     Lis(2);
-    int yyy;
-    sc(d,&yyy);
+    p("Ketik 'Logout' untuk logout\n");
+    sc(s,&yyy);
+    if(strcmp(yyy,satu)) al=ambilsaldo(al);
+	else if(strcmp(yyy,dua)) al=nambahsaldo(al);
+	else if(strcmp(yyy,outp)) break;
+	else p("Menu pilihan yang Anda inginkan tidak tersedia (press Enter)\n");
+	sc(s,&t);
+	}
     p("Terima kasih telah menggunakan aplikasi ini (under maintenance)\n");
+	return al;
 }
 
 bool strcmpk(char x[],char y[]){
@@ -172,7 +232,7 @@ int main(){
             else p("PIN anda salah atau anda belum mendaftar\n");
         }
     }
-    else if(a==-99) break;
     else p("INPUTAN ANDA TIDAK VALID");
+    if(a==-99) break;
     }
 }
